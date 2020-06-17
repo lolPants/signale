@@ -5,6 +5,7 @@ const readline = require('readline');
 const chalk = require('chalk');
 const figures = require('figures');
 const pkgConf = require('pkg-conf');
+const dateformat = require('dateformat');
 const pkg = require('./../package.json');
 const defaultTypes = require('./types');
 
@@ -52,16 +53,6 @@ class Signale {
       secrets: this._secrets,
       logLevel: this._generalLogLevel
     });
-  }
-
-  get date() {
-    const _ = new Date();
-    return [_.getFullYear(), _.getMonth() + 1, _.getDate()].join('-');
-  }
-
-  get timestamp() {
-    const _ = new Date();
-    return [_.getHours(), _.getMinutes(), _.getSeconds()].join(':');
   }
 
   get filename() {
@@ -149,8 +140,11 @@ class Signale {
     return this._arrayify(stream);
   }
 
-  _formatDate() {
-    return `[${this.date}]`;
+  _formatDate(format) {
+    const _ = new Date();
+    const f = typeof format === 'boolean' ? 'yyyy:m:d' : format;
+
+    return `[${dateformat(_, f)}]`;
   }
 
   _formatFilename() {
@@ -166,23 +160,26 @@ class Signale {
     return `[${this._scopeName}]`;
   }
 
-  _formatTimestamp() {
-    return `[${this.timestamp}]`;
+  _formatTimestamp(format) {
+    const _ = new Date();
+    const f = typeof format === 'boolean' ? 'h:M:s' : format;
+
+    return `[${dateformat(_, f)}]`;
   }
 
   _formatMessage(str) {
-    return util.format(...this._arrayify(str));
+    return util.format(...this._arrayify(str));;
   }
 
   _meta() {
     const meta = [];
 
     if (this._config.displayDate) {
-      meta.push(this._formatDate());
+      meta.push(this._formatDate(this._config.displayDate));
     }
 
     if (this._config.displayTimestamp) {
-      meta.push(this._formatTimestamp());
+      meta.push(this._formatTimestamp(this._config.displayTimestamp));
     }
 
     if (this._config.displayFilename) {

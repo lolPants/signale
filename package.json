@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "chalk": "^2.3.2",
+    "dateformat": "^3.0.3",
     "figures": "^2.0.0",
     "pkg-conf": "^2.1.0"
   },

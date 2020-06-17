@@ -60,11 +60,11 @@ declare namespace _signale {
 
   export interface InstanceConfiguration {
     displayBadge?: boolean;
-    displayDate?: boolean;
+    displayDate?: boolean | string;
     displayFilename?: boolean;
     displayLabel?: boolean;
     displayScope?: boolean;
-    displayTimestamp?: boolean;
+    displayTimestamp?: boolean | string;
     underlineLabel?: boolean;
     underlineMessage?: boolean;
     underlinePrefix?: boolean;

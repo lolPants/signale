@@ -17,7 +17,7 @@ function scopedConfigTest() {
   fooLogger.config({
     displayFilename: true,
     displayTimestamp: false,
-    displayDate: true
+    displayDate: 'yyyy-mm-dd'
   });
 
   fooLogger.success('Hello from the Local scope');
